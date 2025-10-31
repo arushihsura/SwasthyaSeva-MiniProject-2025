@@ -1,20 +1,16 @@
+// routes/settingsRoutes.js
 import express from "express";
+import { protect } from "../middleware/authMiddleware.js";
 import {
-  getSettings,
   updateSettings,
+  getSettings,
   resetSettings,
 } from "../controllers/settingsController.js";
-import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// @route   GET /api/settings/get
-router.get("/get", protect, getSettings);
-
-// @route   PUT /api/settings/update
-router.put("/update", protect, updateSettings);
-
-// @route   DELETE /api/settings/reset
-router.delete("/reset", protect, resetSettings);
+router.get("/", protect, getSettings);
+router.put("/", protect, updateSettings);
+router.post("/reset", protect, resetSettings);
 
 export default router;

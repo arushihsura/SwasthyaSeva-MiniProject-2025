@@ -1,24 +1,18 @@
 import express from "express";
 import {
-  getInsights,
   addInsight,
+  getInsightsByProfile,
+  getInsightById,
   deleteInsight,
-  getLatestInsight,
+  deleteProfileInsights,
 } from "../controllers/insightsController.js";
-import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// @route   GET /api/insights/profile/:profileId
-router.get("/profile/:profileId", protect, getInsights);
-
-// @route   GET /api/insights/latest/:profileId
-router.get("/latest/:profileId", protect, getLatestInsight);
-
-// @route   POST /api/insights/add
-router.post("/add", protect, addInsight);
-
-// @route   DELETE /api/insights/:insightId
-router.delete("/:insightId", protect, deleteInsight);
+router.post("/", addInsight); // Add an insight
+router.get("/:profileId", getInsightsByProfile); // Get all insights for profile
+router.get("/single/:id", getInsightById); // Get single insight
+router.delete("/:id", deleteInsight); // Delete one insight
+router.delete("/profile/:profileId", deleteProfileInsights); // Delete all for profile
 
 export default router;

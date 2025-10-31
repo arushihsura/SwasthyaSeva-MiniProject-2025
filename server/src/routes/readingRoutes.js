@@ -6,23 +6,13 @@ import {
   deleteReading,
   deleteProfileReadings,
 } from "../controllers/readingController.js";
-import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// @route   POST /api/readings/add
-router.post("/add", protect, addReading);
-
-// @route   GET /api/readings/profile/:profileId
-router.get("/profile/:profileId", protect, getReadings);
-
-// @route   GET /api/readings/latest/:profileId
-router.get("/latest/:profileId", protect, getLatestReading);
-
-// @route   DELETE /api/readings/:readingId
-router.delete("/:readingId", protect, deleteReading);
-
-// @route   DELETE /api/readings/profile/:profileId
-router.delete("/profile/:profileId", protect, deleteProfileReadings);
+router.post("/", addReading); // Add a new reading
+router.get("/:profileId", getReadings); // Get all readings of profile
+router.get("/latest/:profileId", getLatestReading); // Get latest
+router.delete("/:readingId", deleteReading); // Delete one reading
+router.delete("/profile/:profileId", deleteProfileReadings); // Delete all readings for a profile
 
 export default router;
