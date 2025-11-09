@@ -97,21 +97,27 @@ export const deleteProfile = async (req, res) => {
 // Set active profile (store in user session or return profile data)
 export const setActiveProfile = async (req, res) => {
   try {
+    console.log('🎯 Setting active profile:', req.params.id);
+    console.log('👤 For user:', req.user._id);
+    
     const profile = await HealthProfile.findOne({
       _id: req.params.id,
       user: req.user._id,
     });
 
     if (!profile) {
+      console.log('❌ Profile not found');
       return res.status(404).json({ message: "Profile not found" });
     }
 
+    console.log('✅ Profile found, returning data');
     // Return the full profile data
     res.json({
       message: "Profile selected successfully",
       profile: profile,
     });
   } catch (error) {
+    console.error('❌ Error in setActiveProfile:', error);
     res.status(500).json({ message: error.message });
   }
 };
