@@ -24,7 +24,7 @@ app.use("/api/insights", insightsRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/history", historyRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, "0.0.0.0", () =>
   console.log(`Server running on http://0.0.0.0:${PORT}`)
